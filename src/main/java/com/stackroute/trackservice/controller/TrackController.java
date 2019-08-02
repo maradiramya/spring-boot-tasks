@@ -28,10 +28,16 @@ public class TrackController {
         return new ResponseEntity<>(savedTrack, HttpStatus.OK);
     }
 
-    @GetMapping("track/{id}")
-    public ResponseEntity<?> getTrackById(@PathVariable int id) {
-        Track retriveTrack = trackService.getById(id);
+    @GetMapping("tracks/{name}")
+    public ResponseEntity<?> getTrackByName(@PathVariable String name) {
+      List <Track> retriveTrack = trackService.getByName(name);
         return new ResponseEntity<>(retriveTrack, HttpStatus.OK);
+    }
+    @GetMapping("track/{id}")
+    public ResponseEntity<?> getTrackById(@PathVariable int id)
+    {
+        Track retrivedTrack=trackService.getById(id);
+        return new ResponseEntity<>(retrivedTrack,HttpStatus.OK);
     }
 
     @GetMapping("tracks")
