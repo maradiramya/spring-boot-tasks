@@ -3,7 +3,7 @@ package com.stackroute.trackservice.domain;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
-@Entity(name="track")
+@Entity(name = "track")
 public class Track {
     @Id
     private int id;

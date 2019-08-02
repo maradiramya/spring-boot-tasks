@@ -8,20 +8,19 @@ import org.springframework.context.ApplicationListener;
 import org.springframework.stereotype.Component;
 
 @Component
-public class ApplicationListenerImpl implements ApplicationListener
-{
+public class ApplicationListenerImpl implements ApplicationListener {
     private TrackRepository trackRepository;
-@Autowired
+
+    @Autowired
     public ApplicationListenerImpl(TrackRepository trackRepository) {
         this.trackRepository = trackRepository;
     }
 
     @Override
-    public void onApplicationEvent(ApplicationEvent event)
-    {
-        Track track1=new Track(33,"ramya","track is good");
+    public void onApplicationEvent(ApplicationEvent event) {
+        Track track1 = new Track(33, "ramya", "track is good");
         trackRepository.save(track1);
-        Track track2=new Track(34,"sunona","track is bad");
+        Track track2 = new Track(34, "sunona", "track is bad");
         trackRepository.save(track2);
     }
 }

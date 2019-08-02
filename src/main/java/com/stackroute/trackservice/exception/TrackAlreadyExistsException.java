@@ -1,14 +1,14 @@
 package com.stackroute.trackservice.exception;
 
-public class TrackAlreadyExistsException extends Exception
-{
+public class TrackAlreadyExistsException extends Exception {
     private String meassage;
-    public TrackAlreadyExistsException(){
+
+    public TrackAlreadyExistsException() {
 
     }
-    public TrackAlreadyExistsException(String message)
-    {
+
+    public TrackAlreadyExistsException(String message) {
         super(message);
-        this.meassage=message;
+        this.meassage = message;
     }
 }

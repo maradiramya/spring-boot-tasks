@@ -8,8 +8,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface TrackRepository extends JpaRepository<Track, Integer>
-{
+public interface TrackRepository extends JpaRepository<Track, Integer> {
     //is used for defining custom queries in spring data jpa
     //creation of custom query using name
     @Query(value = "select * from Track t where t.name=?", nativeQuery = true)

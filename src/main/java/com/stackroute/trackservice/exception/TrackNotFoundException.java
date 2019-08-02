@@ -3,7 +3,8 @@ package com.stackroute.trackservice.exception;
 public class TrackNotFoundException extends Exception {
     private String message;
 
-    public TrackNotFoundException() { }
+    public TrackNotFoundException() {
+    }
 
     public TrackNotFoundException(String message) {
         super(message);

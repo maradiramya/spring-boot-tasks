@@ -34,14 +34,11 @@ public class TrackServiceImpl implements TrackService {
 
     @Override
     //implementation method to get track using name
-    public List<Track> getByName(String name) throws TrackNotFoundException
-    {
-        if(trackRepository.findByName(name).isEmpty()) {
+    public List<Track> getByName(String name) throws TrackNotFoundException {
+        if (trackRepository.findByName(name).isEmpty()) {
             throw new TrackNotFoundException("Track not found");
-        }
-        else
-        {
-            List<Track> retriveByName=trackRepository.findByName(name);
+        } else {
+            List<Track> retriveByName = trackRepository.findByName(name);
             return retriveByName;
 
         }
@@ -53,9 +50,7 @@ public class TrackServiceImpl implements TrackService {
         if (trackRepository.existsById(id)) {
             Track retrivedTrack = trackRepository.findById(id).get();
             return retrivedTrack;
-        }
-        else
-        {
+        } else {
             throw new TrackNotFoundException("Track not found");
         }
 
@@ -63,14 +58,11 @@ public class TrackServiceImpl implements TrackService {
 
     @Override
     //implementation method to get all tracks
-    public List<Track> getAllTrack() throws Exception
-    {
-        if(trackRepository.findAll().isEmpty())
-        {
+    public List<Track> getAllTrack() throws Exception {
+        if (trackRepository.findAll().isEmpty()) {
             throw new Exception("internal server error");
-        }
-        else{
-            List<Track> retriveAllTrack=trackRepository.findAll();
+        } else {
+            List<Track> retriveAllTrack = trackRepository.findAll();
             return getAllTrack();
         }
 
@@ -92,7 +84,7 @@ public class TrackServiceImpl implements TrackService {
 
     @Override
     //implementation method to update track
-    public Track updateTrackById(int id,Track track) throws TrackNotFoundException {
+    public Track updateTrackById(int id, Track track) throws TrackNotFoundException {
         if (trackRepository.existsById(id)) {
             Track retrivedTrack = trackRepository.save(track);
             return retrivedTrack;
