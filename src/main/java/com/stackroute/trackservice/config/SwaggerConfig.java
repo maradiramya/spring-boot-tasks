@@ -8,7 +8,7 @@ import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
-@Configuration
+@Configuration //this annotation allows us to use annotations for dependency injection.
 @EnableSwagger2 //annotation is used to enable the Swagger2 for your Spring Boot application.
 public class SwaggerConfig
 {
