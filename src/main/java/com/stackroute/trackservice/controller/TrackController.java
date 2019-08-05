@@ -19,10 +19,10 @@ public class TrackController {
 
     public TrackController() {
     }
-
-    public void trackDummyService(@Qualifier("dummy") TrackService trackService) {
-        this.trackService = trackService;
-    }
+//@Autowired
+//    public void trackDummyService(@Qualifier("dummy") TrackService trackService) {
+//        this.trackService = trackService;
+//    }
 
     @Autowired
     public TrackController(TrackService trackService) {

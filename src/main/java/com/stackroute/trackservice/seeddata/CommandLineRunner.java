@@ -3,10 +3,18 @@ package com.stackroute.trackservice.seeddata;
 import com.stackroute.trackservice.domain.Track;
 import com.stackroute.trackservice.repository.TrackRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 @Component
 public class CommandLineRunner implements org.springframework.boot.CommandLineRunner {
+    @Value("${track.id}")
+    private int id;
+    @Value("${track.name}")
+    private String name;
+    @Value("${track.comments}")
+    private String comment;
+    Track track = new Track();
     private TrackRepository trackRepository;
 
     @Autowired
@@ -16,11 +24,11 @@ public class CommandLineRunner implements org.springframework.boot.CommandLineRu
 
     @Override
     public void run(String... args) throws Exception {
-        Track track1 = new Track(44, "rrrr", "bad");
-        trackRepository.save(track1);
-        Track track2 = new Track(55, "ssss", "good");
-        trackRepository.save(track2);
 
+        track.setId(id);
+        track.setName(name);
+        track.setComments(comment);
+        trackRepository.save(track);
 
     }
 }
