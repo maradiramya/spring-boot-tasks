@@ -13,7 +13,7 @@ public interface TrackService {
     public Track saveTrack(Track track) throws TrackAlreadyExistsException;
 
     //abstract method to get a track using name
-    public List<Track> getByName(String name) throws TrackNotFoundException;
+    public List<Track> findByName(String name) throws TrackNotFoundException;
 
     //abstract method to get a track by using id
     public Track getById(int id) throws TrackNotFoundException;

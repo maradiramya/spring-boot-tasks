@@ -37,7 +37,7 @@ public class TrackServiceImpl implements TrackService {
 
     @Override
     //implementation method to get track using name
-    public List<Track> getByName(String name) throws TrackNotFoundException {
+    public List<Track> findByName(String name) throws TrackNotFoundException {
         if (trackRepository.findByName(name).isEmpty()) {
             throw new TrackNotFoundException("Track not found");
         } else {
@@ -46,12 +46,13 @@ public class TrackServiceImpl implements TrackService {
 
         }
     }
+
     @Profile("prod")
     @Override
     //implementation method to get track using id
     public Track getById(int id) throws TrackNotFoundException {
         if (trackRepository.existsById(id)) {
-            Track retrivedTrack = trackRepository.findById(id).get();
+            Track retrivedTrack = trackRepository.findById(id);
             return retrivedTrack;
         } else {
             throw new TrackNotFoundException("Track not found");
@@ -76,7 +77,7 @@ public class TrackServiceImpl implements TrackService {
     public Track deleteTrackById(int id) throws TrackNotFoundException {
 
         if (trackRepository.existsById(id)) {
-            Track retrivedTrack = trackRepository.findById(id).get();
+            Track retrivedTrack = trackRepository.findById(id);
             trackRepository.deleteById(id);
             return retrivedTrack;
         } else {
