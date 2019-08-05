@@ -47,7 +47,7 @@ public class TrackServiceImpl implements TrackService {
 
         }
     }
-
+    @Profile("prod")
     @Override
     //implementation method to get track using id
     public Track getById(int id) throws TrackNotFoundException {
