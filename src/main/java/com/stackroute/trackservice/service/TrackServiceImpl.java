@@ -18,6 +18,7 @@ public class TrackServiceImpl implements TrackService {
     private TrackRepository trackRepository;
 
     @Autowired
+
     public TrackServiceImpl(TrackRepository trackRepository) {
         this.trackRepository = trackRepository;
     }
@@ -31,8 +32,11 @@ public class TrackServiceImpl implements TrackService {
         if (trackRepository.existsById(track.getId())) {
             throw new TrackAlreadyExistsException("track already exists");
         }
-        Track savedUser = trackRepository.save(track);
-        return savedUser;
+        Track savedTrack = trackRepository.save(track);
+        if (savedTrack == null) {
+            throw new TrackAlreadyExistsException("No response from the database");
+        }
+        return savedTrack;
     }
 
     @Override
@@ -67,15 +71,12 @@ public class TrackServiceImpl implements TrackService {
             throw new Exception("internal server error");
         } else {
             List<Track> retriveAllTrack = trackRepository.findAll();
-            return getAllTrack();
+            return retriveAllTrack;
         }
-
     }
 
     @Override
-    //implementation method to delete track using id
     public Track deleteTrackById(int id) throws TrackNotFoundException {
-
         if (trackRepository.existsById(id)) {
             Track retrivedTrack = trackRepository.findById(id);
             trackRepository.deleteById(id);
@@ -83,7 +84,6 @@ public class TrackServiceImpl implements TrackService {
         } else {
             throw new TrackNotFoundException("Track not found");
         }
-
     }
 
     @Override

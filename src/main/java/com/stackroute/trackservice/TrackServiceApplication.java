@@ -8,7 +8,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 @EnableSwagger2
 @SpringBootApplication
-@PropertySource("application-dev.properties")
+@PropertySource("classpath:application-dev.properties")
 public class TrackServiceApplication {
     public static void main(String[] args) {
         SpringApplication.run(TrackServiceApplication.class, args);

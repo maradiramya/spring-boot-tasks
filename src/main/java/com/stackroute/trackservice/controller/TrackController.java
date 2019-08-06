@@ -28,13 +28,13 @@ public class TrackController {
     @PostMapping("track")
     public ResponseEntity<?> savedTrack(@RequestBody Track track) throws TrackAlreadyExistsException {
         Track savedTrack = trackService.saveTrack(track);
-        return new ResponseEntity<>(savedTrack, HttpStatus.OK);
+        return new ResponseEntity<>(savedTrack, HttpStatus.CREATED);
     }
 
     @GetMapping("tracks/{name}")
     public ResponseEntity<?> findTrackByName(@PathVariable String name) throws TrackNotFoundException {
         List<Track> trackByName = trackService.findByName(name);
-        return new ResponseEntity(trackByName, HttpStatus.OK);
+        return new ResponseEntity(trackByName, HttpStatus.FOUND);
     }
 
     @GetMapping("track/{id}")
@@ -51,7 +51,7 @@ public class TrackController {
 
     @DeleteMapping("track/{id}")
     public ResponseEntity<?> deleteTrackById(@PathVariable int id) throws TrackNotFoundException {
-        Track track = trackService.getById(id);
+        Track track = trackService.deleteTrackById(id);
         return new ResponseEntity(track, HttpStatus.OK);
     }
 
