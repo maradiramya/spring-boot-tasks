@@ -43,7 +43,7 @@ public class TrackControllerTest {
     //Inject the mocks as dependencies into TrackServiceController
     private TrackController trackController;
 
-    private List<Track> list = null;
+    private List<Track> list;
 
 
     @Before
@@ -57,69 +57,92 @@ public class TrackControllerTest {
         list = new ArrayList();
         list.add(track);
     }
+    @After
+    public void tearDown() throws Exception {
+        track=null;
+        list=null;
+    }
+        
 
     @Test
-    public void savedTrack() throws Exception {
+    public void givenTrackDetailsShouldReturnSavedTrack() throws Exception {
         when(trackService.saveTrack(any())).thenReturn(track);
         mockMvc.perform(MockMvcRequestBuilders.post("/api/v1/track")
                 .contentType(MediaType.APPLICATION_JSON).content(asJsonString(track)))
                 .andExpect(MockMvcResultMatchers.status().isCreated())
                 .andDo(MockMvcResultHandlers.print());
+         //verify here verifies that trackService save method is only called once
+        verify(trackService,times(1)).saveTrack(track);
     }
 
     @Test
-    public void saveTrackFailure() throws Exception {
+    public void givenTrackDetailsShouldNotReturnSavedTrack() throws Exception {
         when(trackService.saveTrack(any())).thenThrow(TrackAlreadyExistsException.class);
         mockMvc.perform(MockMvcRequestBuilders.post("/api/v1/track")
                 .contentType(MediaType.APPLICATION_JSON).content(asJsonString(track)))
                 .andExpect(MockMvcResultMatchers.status().isConflict())
                 .andDo(MockMvcResultHandlers.print());
+        //verify here verifies that trackService save method is only called once
+        verify(trackService,times(1)).saveTrack(track);
     }
 
 
     @Test
-    public void getAllTracks() throws Exception {
+    public void givenTrackShouldReturnListOfSavedTrack() throws Exception {
         when(trackService.getAllTrack()).thenReturn(list);
         mockMvc.perform(MockMvcRequestBuilders.get("/api/v1/tracks")
                 .contentType(MediaType.APPLICATION_JSON).content(asJsonString(track)))
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andDo(MockMvcResultHandlers.print());
+        //verify here verifies that trackService getAllTrack method is only called once
+        verify(trackService,times(1)).getAllTrack();
     }
 
     @Test
-    public void findByName() throws Exception {
+    public void givenNameShouldReturnTrackFromListOfTrack() throws Exception {
         when(trackService.findByName("ramya")).thenReturn(List.of(track));
         mockMvc.perform(MockMvcRequestBuilders.get("/api/v1/tracks/name")
                 .contentType(MediaType.APPLICATION_JSON).content(asJsonString(list)))
                 .andExpect(MockMvcResultMatchers.status().isFound())
                 .andDo(MockMvcResultHandlers.print());
+        //verify here verifies that trackService findByName method is only called once
+        verify(trackService,times(1)).findByName("name");
+
     }
 
     @Test
-    public void deleteTrackById() throws Exception {
+    public void givenTrackIdShouldReturnDeletedTrack() throws Exception {
         when(trackService.deleteTrackById(10)).thenReturn(track);
         mockMvc.perform(MockMvcRequestBuilders.get("/api/v1/track/10")
                 .contentType(MediaType.APPLICATION_JSON).content(asJsonString(track)))
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andDo(MockMvcResultHandlers.print());
+        //verify here verifies that trackService getById method is only called once
+        verify(trackService,times(1)).getById(10);
     }
 
     @Test
-    public void updatedTrackById() throws Exception {
-        when(trackService.updateTrackById(10, track)).thenReturn(track);
+    public void givenTrackIdShouldReturnUpdatedTrack() throws Exception {
+            when(trackService.updateTrack(track)).thenReturn(track);
         mockMvc.perform(MockMvcRequestBuilders.get("/api/v1/track/10")
                 .contentType(MediaType.APPLICATION_JSON).content(asJsonString(track)))
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andDo(MockMvcResultHandlers.print());
+        //verify here verifies that trackService getById method is only called once
+        verify(trackService,times(1)).getById(10);
+
     }
 
     @Test
-    public void getTrackById() throws Exception {
+    public void givenTrackIdShouldReturnTrackOfGivenId() throws Exception {
         when(trackService.getById(10)).thenReturn(track);
         mockMvc.perform(MockMvcRequestBuilders.get("/api/v1/track/10")
                 .contentType(MediaType.APPLICATION_JSON).content(asJsonString(track)))
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andDo(MockMvcResultHandlers.print());
+        //verify here verifies that trackService getById method is only called once
+        verify(trackService,times(1)).getById(10);
+
     }
 
     private static String asJsonString(final Object obj) {
