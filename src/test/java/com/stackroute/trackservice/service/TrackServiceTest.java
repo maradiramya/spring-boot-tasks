@@ -109,7 +109,7 @@ public class TrackServiceTest {
 
     @Test
     public void givenTrackIdShouldReturnUpdatedTrack() throws TrackNotFoundException, TrackAlreadyExistsException {
-        when(trackRepository.existsById(101)).thenReturn(true);
+        when(trackRepository.existsById(10)).thenReturn(true);
         when(trackRepository.save(track)).thenReturn(track);
         Track updateTrackById = trackService.saveTrack(track);
         Assert.assertEquals(track, updateTrackById);
