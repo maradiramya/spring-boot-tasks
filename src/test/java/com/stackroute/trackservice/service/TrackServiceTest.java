@@ -104,8 +104,8 @@ public class TrackServiceTest {
         when(trackRepository.findById(10)).thenReturn(track);
         Track deleteTrackById = trackService.getById(10);
         Assert.assertEquals(track, deleteTrackById);
-         //verify here verifies that trackRepository findById method is only called once
-        verify(trackRepository, times(1)).findById(10);
+         //verify here verifies that trackRepository existsById method is only called once
+        verify(trackRepository, times(1)).existsById(10);
     }
 
     @Test
