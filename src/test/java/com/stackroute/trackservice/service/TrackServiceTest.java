@@ -26,7 +26,7 @@ public class TrackServiceTest {
     //Inject the mocks as dependencies into TrackServiceImpl
     @InjectMocks
    private TrackServiceImpl trackService;
-    List<Track> list=null;
+    List<Track> list;
 
     @Before
     public void setUp() {
