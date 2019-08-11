@@ -27,8 +27,8 @@ import static org.junit.Assert.*;
 //Spring Boot provides a convenient way to set up an environment with an embedded database to test our database queries against.
 public class TrackRepositoryTest {
     @Autowired
-    TrackRepository trackRepository;
-    Track track;
+  private TrackRepository trackRepository;
+  private Track track;
 
     @Before
     public void setUp() throws Exception {
@@ -42,17 +42,18 @@ public class TrackRepositoryTest {
     @After
     public void tearDown() throws Exception {
         trackRepository.deleteAll();
+        track=null;
     }
 
     @Test
-    public void findById() {
+    public void givenIdShouldReturnSavedTrack() {
         trackRepository.save(track);
         Track fetchTrack = trackRepository.findById(track.getId());
         Assert.assertEquals(10, fetchTrack.getId());
     }
 
     @Test
-    public void testTrackFailure() {
+    public void givenIdShouldNotReturnSavedTrack() {
         Track testTrack = new Track(34, "darshan", "track is nice");
         trackRepository.save(track);
         Track fetchTrack = trackRepository.findById(track.getId());
@@ -60,10 +61,23 @@ public class TrackRepositoryTest {
     }
 
     @Test
-    public void findByName() {
+    public void givenNameShouldReturnSavedTracks() {
         Track testTrack = new Track(20, "raj", "track is better");
         trackRepository.save(testTrack);
         List<Track> fetchTrack = trackRepository.findAll();
         Assert.assertEquals("raj", fetchTrack.get(0).getName());
     }
+    
+    @Test
+    public void givenIdShouldreturnUpdatedTrack(){
+        trackRepository.save(track);
+        Track updateTrack=trackRepository.updateTrack(track);
+        Assert.assertEquals(10,updateTrack.getId());
+   }
+    @Test
+    public void givenIdShoudReturnDeletedTrack(){
+        trackRepository.save(track);
+        Track deletedTrack=trackRepository.deleteTrackById(track.getId());
+        Assert.assertEquals(10,deletedTrack.getId());
+  }
 }
