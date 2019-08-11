@@ -46,6 +46,7 @@ public class TrackServiceTest {
     }
     @Test
     public void givenTrackDetailsShouldReturnSavedTrack() throws TrackAlreadyExistsException {
+       when(trackRepository.existsById(track.getId())).thenReturn(false);
         when(trackRepository.save((Track) any())).thenReturn(track);
         Track savedTrack = trackService.saveTrack(track);
         Assert.assertEquals(track, savedTrack);
