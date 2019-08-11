@@ -61,7 +61,7 @@ public class TrackServiceTest {
         Assert.assertNotEquals(track, savedTrack);
         //verify here verifies that trackRepository save method is only called once
         verify(trackRepository, times(1)).save(track);
-   }
+    }
 
     @Test
     public void givenTrackShouldReturnListOfSavedTrack() throws Exception {
