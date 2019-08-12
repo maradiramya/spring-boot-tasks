@@ -106,7 +106,7 @@ public class TrackControllerTest {
                 .andExpect(MockMvcResultMatchers.status().isFound())
                 .andDo(MockMvcResultHandlers.print());
         //verify here verifies that trackService findByName method is only called once
-        verify(trackService,times(1)).findByName("name");
+        verify(trackService, times(1)).findByName(track.getName());
 
     }
 
@@ -118,7 +118,7 @@ public class TrackControllerTest {
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andDo(MockMvcResultHandlers.print());
         //verify here verifies that trackService getById method is only called once
-        verify(trackService,times(1)).getById(10);
+        verify(trackService, times(1)).getById(track.getId());
     }
 
     @Test
@@ -129,7 +129,7 @@ public class TrackControllerTest {
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andDo(MockMvcResultHandlers.print());
         //verify here verifies that trackService getById method is only called once
-        verify(trackService,times(1)).getById(10);
+        verify(trackService, times(1)).getById(track.getId());
 
     }
 
@@ -141,7 +141,7 @@ public class TrackControllerTest {
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andDo(MockMvcResultHandlers.print());
         //verify here verifies that trackService getById method is only called once
-        verify(trackService,times(1)).getById(10);
+        verify(trackService, times(1)).getById(track.getId());
 
     }
 
