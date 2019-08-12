@@ -34,6 +34,10 @@ public class TrackController {
             responseEntity = new ResponseEntity(e.getMessage(), HttpStatus.CONFLICT);
             e.printStackTrace();
         }
+        catch(Exception ex){
+            responseEntity = new ResponseEntity(ex.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+            ex.printStackTrace();
+        }
         return responseEntity;
     }
 
@@ -48,6 +52,10 @@ public class TrackController {
       {
           responseEntity=new ResponseEntity(e.getMessage(),HttpStatus.NOT_FOUND);
       }
+        catch(Exception ex){
+            responseEntity = new ResponseEntity(ex.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+            ex.printStackTrace();
+        }
 
         return responseEntity;
     }
@@ -62,6 +70,10 @@ public class TrackController {
         } catch (TrackNotFoundException e) {
             responseEntity = new ResponseEntity(e.getMessage(), HttpStatus.NOT_FOUND);
             e.printStackTrace();
+        }
+        catch(Exception ex){
+            responseEntity = new ResponseEntity(ex.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+            ex.printStackTrace();
         }
         return responseEntity;
     }
@@ -91,6 +103,10 @@ public class TrackController {
             responseEntity = new ResponseEntity(e.getMessage(), HttpStatus.NOT_FOUND);
             e.printStackTrace();
         }
+        catch(Exception ex){
+            responseEntity = new ResponseEntity(ex.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+            ex.printStackTrace();
+        }
         return responseEntity;
     }
 
@@ -103,6 +119,10 @@ public class TrackController {
         } catch (TrackNotFoundException e) {
             responseEntity = new ResponseEntity(e.getMessage(), HttpStatus.NOT_FOUND);
             e.printStackTrace();
+        }
+        catch(Exception ex){
+            responseEntity = new ResponseEntity(ex.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+            ex.printStackTrace();
         }
         return responseEntity;
     }
