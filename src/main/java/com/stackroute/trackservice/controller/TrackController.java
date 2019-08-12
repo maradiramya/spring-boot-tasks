@@ -15,6 +15,7 @@ import java.util.List;
 @RequestMapping("api/v1")
 public class TrackController {
     private TrackService trackService;
+    private ResponseEntity responseEntity;
 
     public TrackController() {
     }
@@ -26,7 +27,7 @@ public class TrackController {
 
     @PostMapping("track")
     public ResponseEntity<?> savedTrack(@RequestBody Track track) {
-        ResponseEntity responseEntity;
+        
         try {
             Track saveTrack = trackService.saveTrack(track);
             responseEntity = new ResponseEntity(saveTrack, HttpStatus.CREATED);
@@ -43,7 +44,7 @@ public class TrackController {
 
     @GetMapping("tracks/{name}")
     public ResponseEntity<?> getTrackByName(@PathVariable String name) {
-      ResponseEntity responseEntity;
+   
       try{
          List <Track> trackByName=trackService.getByName(name);
           responseEntity=new ResponseEntity(trackByName,HttpStatus.CREATED);
@@ -62,7 +63,7 @@ public class TrackController {
 
     @GetMapping("track/{id}")
     public ResponseEntity<?> getTrackById(@PathVariable int id) {
-        ResponseEntity responseEntity;
+       
         try {
 
             Track track = trackService.getById(id);
@@ -80,7 +81,7 @@ public class TrackController {
 
     @GetMapping("tracks")
     public ResponseEntity<?> getAllTracks() {
-        ResponseEntity responseEntity;
+        
         try{
         List  <Track> allTrack= trackService.getAllTrack();
             responseEntity=new ResponseEntity(allTrack,HttpStatus.INTERNAL_SERVER_ERROR);
@@ -95,7 +96,7 @@ public class TrackController {
 
     @DeleteMapping("track/{id}")
     public ResponseEntity<?> deleteTrackById(@PathVariable int id) {
-        ResponseEntity responseEntity;
+        
         try {
             Track track = trackService.getById(id);
             responseEntity = new ResponseEntity<>(track, HttpStatus.CREATED);
@@ -112,7 +113,7 @@ public class TrackController {
 
     @PutMapping("track/{id}")
     public ResponseEntity<?> updateTrack(@PathVariable int id,@RequestBody Track track) {
-        ResponseEntity responseEntity;
+      
         try {
             Track updateTrack = trackService.updateTrackById(id,track);
             responseEntity = new ResponseEntity<>(updateTrack, HttpStatus.UPGRADE_REQUIRED);
