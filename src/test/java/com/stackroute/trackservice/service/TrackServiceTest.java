@@ -52,6 +52,8 @@ public class TrackServiceTest {
         Assert.assertEquals(track, savedTrack);
         //verify here verifies that trackRepository save method is only called once
         verify(trackRepository, times(1)).save(track);
+       //verify here verifies that trackRepository existsById method is only called once
+        verify(trackRepository, times(1)).existsById(track.getId());
     }
 
     @Test(expected = TrackAlreadyExistsException.class)
@@ -62,6 +64,8 @@ public class TrackServiceTest {
         Assert.assertNotEquals(track, savedTrack);
         //verify here verifies that trackRepository save method is only called once
         verify(trackRepository, times(1)).save(track);
+        //verify here verifies that trackRepository existsById method is only called once
+        verify(trackRepository, times(1)).existsById(track.getId());
     }
 
     @Test
@@ -71,7 +75,7 @@ public class TrackServiceTest {
         when(trackRepository.findAll()).thenReturn(list);
         List<Track> tracklist = trackService.getAllTrack();
         Assert.assertEquals(list, tracklist);
-         //verify here verifies that trackRepository findAll method is called twice
+        //verify here verifies that trackRepository findAll method is called twice
         verify(trackRepository, times(2)).findAll();
     }
 
@@ -80,8 +84,8 @@ public class TrackServiceTest {
         when(trackRepository.findByName(any())).thenReturn((list));
         List<Track> fetchTrack = trackService.findByName("ramya");
         Assert.assertEquals(list, fetchTrack);
-       //verify here verifies that trackRepository findByName method is called twice
-        verify(trackRepository, times(2)).findByName("ramya");
+        //verify here verifies that trackRepository findByName method is only called once
+        verify(trackRepository, times(2)).findByName(track.getName());
 
 
     }
@@ -93,8 +97,10 @@ public class TrackServiceTest {
         when(trackRepository.findById(10)).thenReturn((track));
         Track fetchTrackById = trackService.getById(10);
         Assert.assertEquals(track, fetchTrackById);
+        //verify here verifies that trackRepository existsById method is only called once
+        verify(trackRepository, times(1)).existsById(track.getId());
         //verify here verifies that trackRepository findById method is only called once
-        verify(trackRepository, times(1)).findById(10);
+        verify(trackRepository, times(1)).findById(track.getId());
     }
 
     @Test
@@ -104,8 +110,10 @@ public class TrackServiceTest {
         when(trackRepository.findById(10)).thenReturn(track);
         Track deleteTrackById = trackService.getById(10);
         Assert.assertEquals(track, deleteTrackById);
-         //verify here verifies that trackRepository existsById method is only called once
-        verify(trackRepository, times(1)).existsById(10);
+        //verify here verifies that trackRepository existsById method is only called once
+        verify(trackRepository, times(1)).existsById(track.getId());
+        //verify here verifies that trackRepository findById method is only called once
+        verify(trackRepository, times(1)).findById(track.getId());
     }
 
     @Test
@@ -114,7 +122,9 @@ public class TrackServiceTest {
         when(trackRepository.save(track)).thenReturn(track);
         Track updateTrackById = trackService.saveTrack(track);
         Assert.assertEquals(track, updateTrackById);
-         //verify here verifies that trackRepository save method is only called once
+        //verify here verifies that trackRepository existsById method is only called once
+        verify(trackRepository, times(1)).existsById(track.getId());
+        //verify here verifies that trackRepository save method is only called once
         verify(trackRepository, times(1)).save(track);
     }
 
