@@ -16,5 +16,9 @@ public class GlobalException
     public ResponseEntity<?> alreadyExists(final TrackAlreadyExistsException e){
         return new ResponseEntity(e.getMessage(), HttpStatus.CONFLICT);
     }
+    @ExceptionHandler(Exception.class)
+    public ResponseEntity<?> exception( final Exception e){
+      return new ResponseEntity<String>(e.getMessage(),HttpStatus.INTERNAL_SERVER_ERROR);
+    }
 
 }
