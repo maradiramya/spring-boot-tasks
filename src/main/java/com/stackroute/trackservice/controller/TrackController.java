@@ -15,6 +15,7 @@ import java.util.List;
 @RequestMapping("api/v1")
 public class TrackController {
     private TrackService trackService;
+    private ResponseEntity responseEntity;
 
     public TrackController() {
     }
@@ -25,38 +26,44 @@ public class TrackController {
     }
 
     @PostMapping("track")
-    public ResponseEntity<?> savedTrack(@RequestBody Track track) throws TrackAlreadyExistsException {
+    public ResponseEntity<?> savedTrack(@RequestBody Track track) throws TrackAlreadyExistsException,Exception {
         Track savedTrack = trackService.saveTrack(track);
-        return new ResponseEntity<>(savedTrack, HttpStatus.OK);
+        responseEntity = new ResponseEntity<>(savedTrack, HttpStatus.CREATED);
+        return responseEntity;
     }
 
     @GetMapping("tracks/{name}")
-    public ResponseEntity<?> getTrackByName(@PathVariable String name) throws TrackNotFoundException {
+    public ResponseEntity<?> getTrackByName(@PathVariable String name) throws TrackNotFoundException,Exception {
         List<Track> trackByName = trackService.getByName(name);
-        return new ResponseEntity(trackByName, HttpStatus.OK);
+        responseEntity = new ResponseEntity(trackByName, HttpStatus.FOUND);
+        return responseEntity;
     }
 
     @GetMapping("track/{id}")
-    public ResponseEntity<?> getTrackById(@PathVariable int id) throws TrackNotFoundException {
+    public ResponseEntity<?> getTrackById(@PathVariable int id) throws TrackNotFoundException,Exception {
         Track track = trackService.getById(id);
-        return new ResponseEntity(track, HttpStatus.OK);
+        responseEntity = new ResponseEntity(track, HttpStatus.OK);
+        return responseEntity;
     }
 
-    @GetMapping("tracks")
+    @GetMapping("tracks") throws Exception
     public ResponseEntity<?> getAllTracks() throws Exception {
         List<Track> allTrack = trackService.getAllTrack();
-        return new ResponseEntity(allTrack, HttpStatus.OK);
+        responseEntity = new ResponseEntity(allTrack, HttpStatus.OK);
+        return responseEntity;
     }
 
     @DeleteMapping("track/{id}")
-    public ResponseEntity<?> deleteTrackById(@PathVariable int id) throws TrackNotFoundException {
+    public ResponseEntity<?> deleteTrackById(@PathVariable int id) throws TrackNotFoundException,Exception {
         Track track = trackService.getById(id);
-        return new ResponseEntity(track, HttpStatus.OK);
+        responseEntity = new ResponseEntity(allTrack, HttpStatus.OK);
+        return responseEntity;
     }
 
     @PutMapping("track/{id}")
-    public ResponseEntity<?> updateTrack(@PathVariable int id, @RequestBody Track track) throws TrackNotFoundException {
+    public ResponseEntity<?> updateTrack(@PathVariable int id, @RequestBody Track track) throws TrackNotFoundException,Exception {
         Track updateTrack = trackService.updateTrackById(id, track);
-        return new ResponseEntity<>(updateTrack, HttpStatus.OK);
+        responseEntity = new ResponseEntity(allTrack, HttpStatus.OK);
+        return responseEntity;
     }
 }
